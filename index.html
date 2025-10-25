@@ -1,213 +1,284 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
-  <!-- 網站圖標 -->
+  <meta charset="utf-8">
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Ruixue9626/Mining.ru.web/50e15469a9fd6cfb1730f0bd686de0c0ae6218f4/Mining-ru.png" />
   <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/Ruixue9626/Mining.ru.web/50e15469a9fd6cfb1730f0bd686de0c0ae6218f4/Mining-ru.png" />
   <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/Ruixue9626/Mining.ru.web/50e15469a9fd6cfb1730f0bd686de0c0ae6218f4/Mining-ru.png" />
-
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Mining-ru 官方網站</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mining-ru — Discord 挖礦機器人</title>
   <style>
-    html, body {
-      margin:0; padding:0;
-      font-family: "Segoe UI", Roboto, system-ui, -apple-system;
-      background-color: #f8f4ef;
-      color: #3b2a1c;
+    :root {
+      --bg: #0f1724;
+      --card: #0b1220;
+      --accent: #f59e0b;
+      --muted: #94a3b8;
+      --glass: rgba(255, 255, 255, 0.03);
     }
-    .banner {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      height: 64px;
-      background: linear-gradient(90deg, #b87333, #d88c4c);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 20px;
+    * {
       box-sizing: border-box;
-      border-bottom-left-radius: 12px;
-      border-bottom-right-radius: 12px;
-      z-index: 10;
-      box-shadow: 0 4px 16px rgba(80, 50, 20, 0.25);
     }
-    .banner .brand {
-      font-weight: 700;
-      font-size: 20px;
-      color: #fffaf2;
+    body {
+      margin: 0;
+      font-family: Inter, "Noto Sans TC", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg, #061024 0%, #071426 100%);
+      color: #e6eef8;
+      -webkit-font-smoothing: antialiased;
     }
-    .banner .menu-container {
+    .container {
+      max-width: 980px;
+      margin: 48px auto;
+      padding: 24px;
+    }
+    header {
       display: flex;
       align-items: center;
       gap: 16px;
     }
-    .menu-btn {
-      font-size: 24px;
-      cursor: pointer;
-      color: #fffaf2;
-      user-select: none;
-    }
-    .nav {
+    .logo {
+      width: 72px;
+      height: 72px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #ffb86b, #ff7ab6);
       display: flex;
-      gap: 16px;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #102027;
     }
-    .nav a {
-      text-decoration:none;
-      color:#5a3924;
-      font-weight:600;
-      background:#fffdf8;
-      padding:10px 16px;
-      border-radius:12px;
-      box-shadow:0 2px 6px rgba(90,60,30,0.15);
-      transition: background 0.3s, box-shadow 0.3s;
+    h1 {
+      font-size: 1.6rem;
+      margin: 0;
     }
-    .nav a:hover {
-      background:#f0e0d0;
-      box-shadow:0 4px 12px rgba(90,60,30,0.25);
+    p.lead {
+      color: var(--muted);
+      margin: 6px 0 18px;
     }
-    .nav a.active {
-      background: linear-gradient(90deg, #b87333, #d88c4c);
-      color:#fff;
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 20px;
     }
-    .hidden {display:none;}
-    .main {
-      margin-top: 80px;
-      padding:0 20px 50px;
-      max-width:900px;
-      margin-left:auto;
-      margin-right:auto;
+    .card {
+      background: var(--card);
+      padding: 18px;
+      border-radius: 14px;
+      box-shadow: 0 6px 18px rgba(2, 6, 23, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.03);
     }
-    .section {
-      background:#fffdf8;
-      border-radius:16px;
-      padding:20px;
-      margin-bottom:24px;
-      box-shadow:0 4px 12px rgba(90,60,30,0.15);
-      border-left:6px solid #b87333;
+    .features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
     }
-    .section h2 { margin-top:0; font-size:22px; color:#8b4513;}
-    .section p { font-size:16px; line-height:1.6; margin:0;}
-    .links {
-      display:flex; flex-direction:column;
-      gap:16px; max-width:400px; margin:0 auto;
+    .feature {
+      background: var(--glass);
+      padding: 12px;
+      border-radius: 10px;
     }
-    .link-btn {
-      display:flex; align-items:center; justify-content:center;
-      min-height:56px; padding:10px 18px; border-radius:16px; border:none;
-      cursor:pointer; background:linear-gradient(145deg,#f6ede3,#fff);
-      font-size:16px; text-decoration:none; color:#5a3924; font-weight:600;
-      box-shadow:0 2px 8px rgba(90,60,30,0.15);
-      transition: background 0.3s, box-shadow 0.3s;
+    .cta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 12px;
     }
-    .link-btn:hover { background:#f0e0d0; box-shadow:0 4px 16px rgba(90,60,30,0.25);}
-    @media(max-width:600px){
-      .section h2{font-size:20px;}
-      .section p{font-size:15px;}
-      .link-btn{font-size:15px; min-height:44px;}
+    .btn {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .btn-primary {
+      background: linear-gradient(90deg, var(--accent), #ffb3a7);
+      color: #071426;
+    }
+    .btn-ghost {
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: transparent;
+      color: #e6eef8;
+    }
+    .meta {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+    footer {
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-align: center;
+      margin-top: 26px;
+    }
+    details {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      margin-top: 10px;
+      transition: background-color 0.2s ease;
+      overflow: hidden; /* 隱藏動畫過程中的內容 */
+    }
+    details[open] {
+      background: var(--glass);
+    }
+    /* 手風琴動畫容器 */
+    .details-content {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.3s ease-out;
+    }
+    details[open] .details-content {
+      grid-template-rows: 1fr;
+    }
+    .details-content > div {
+      overflow: hidden;
+    }
+    summary {
+      cursor: pointer;
+      font-weight: 700;
+      list-style: none; /* 移除預設的箭頭 */
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    summary::-webkit-details-marker {
+      display: none; /* 再次確保在 Safari 中移除預設箭頭 */
+    }
+    summary::after {
+      content: '▼';
+      font-size: 0.7em;
+      transform: rotate(0deg);
+      transition: transform 0.3s ease;
+    }
+    details[open] summary::after {
+      transform: rotate(180deg);
+    }
+    .small {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    @media (max-width: 880px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      .logo {
+        width: 56px;
+        height: 56px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="banner">
-    <div class="brand" id="brand-text">Mining.ru</div>
-    <div class="menu-container">
-      <div class="menu-btn" id="menu-btn">☰</div>
-      <div class="nav hidden" id="nav-bar">
-        <a href="#" id="tab-home" onclick="showPage('home')">首頁</a>
-        <a href="#" id="tab-usage" onclick="showPage('usage')">用法</a>
-        <a href="#" id="tab-rules" onclick="showPage('rules')">規則</a>
+  <div class="container">
+    <header>
+      <div class="logo">⛏️</div>
+      <div>
+        <h1>Mining-ru — Discord 挖礦機器人</h1>
+        <p class="lead">功能強大、設計精良，把挖礦變成社群互動的一部分，聊天也能挖礦，歡迎加入！</p>
       </div>
-    </div>
-  </div>
+    </header>
 
-  <main class="main">
-    <div id="home" class="page">
-      <div class="section">
-        <h2>⛏️什麼是 Mining-ru？</h2>
-        <p>🔹「Mining-ru」是一款由 <b>Ruixue</b> 開發的 Discord 機器人，專注於模擬挖礦與數位經濟玩法。<br>
-        🔹在伺服器中，你可以透過指令挖礦、交易，甚至和其他玩家互動，打造屬於自己的礦業帝國！<br>
-        🔹它不只是一個遊戲機器人，更是一個小社群的樂園，讓大家可以一邊聊天一邊挖礦～</p>
-      </div>
-      <div class="section">
-        <h2>⚡功能特色</h2>
-        <p>🔹礦業經濟系統：透過指令挖礦、煉製、販售累積資產。</p>
-        <p>🔹每日簽到：每天可領取原礦，鼓勵每日活躍。</p>
-        <p>🔹AI 問答：內建 Cohere 語言模型，可進行簡單問答。</p>
-        <p>🔹影片下載：使用 yt-dlp 下載 YouTube 影片（需 ffmpeg）。</p>
-        <p>🔹玩家資料儲存：以 JSON 保存玩家礦石、煉好銅及金錢資訊。</p>
-      </div>
-      <div class="section">
-        <h2>📌加入 Mining-ru</h2>
-        <div class="links">
-          <a class="link-btn" href="https://www.threads.com/@mining.ru_discordbot" target="_blank">Threads</a>
-          <a class="link-btn" href="https://discord.com/oauth2/authorize?client_id=1226477089117700188&scope=bot+applications.commands&permissions=8" target="_blank">邀請到伺服器</a>
-          <a class="link-btn" href="https://discord.gg/57BMuH6d3X" target="_blank">Discord</a>
+    <div class="grid" style="margin-top:18px">
+      <main class="card">
+        <h2>什麼是 Mining-ru</h2>
+        <p class="small">⛏️ Mining-ru 是一款整合聊天與遊戲化挖礦體驗的 Discord 機器人。她讓伺服器成員在日常互動中，同時享受挖礦、煉銅、交易等完整流程。</p>
+
+        <h3 style="margin-top:16px">她有什麼功能</h3>
+        <div class="features" style="margin-top:10px">
+          <div class="feature">
+            <strong>挖礦系統</strong>
+            <div class="small">從開採到資源管理與升級，還原完整挖礦流程。</div>
+          </div>
+          <div class="feature">
+            <strong>煉銅與販賣</strong>
+            <div class="small">資源可煉製為商品並放上市集販售，模擬經濟系統。</div>
+          </div>
+          <div class="feature">
+            <strong>社群工具</strong>
+            <div class="small">歡迎新人、公告、自動化管理、AI 聊天等實用功能。</div>
+          </div>
+          <div class="feature">
+            <strong>遊戲化互動</strong>
+            <div class="small">贈禮、乞討功能讓玩家可以和玩家培養互動。</div>
+          </div>
         </div>
-      </div>
-      <div class="section">
-        <h2>👩‍💻開發者的話</h2>
-        <p>這是我在 2025 年親手打造的專案，<br>
-        希望它不只是「一個機器人」，而是大家在 Discord 上的快樂角落。<br>
-        未來會持續更新新玩法，敬請期待！✨</p>
-      </div>
+
+        <h3 style="margin-top:20px">為什麼選擇我們</h3>
+        <details>
+          <summary>🔹 簡單</summary>
+          <div class="details-content">
+            <div><p class="small" style="padding-top: 8px;">指令直覺易懂，連 100 歲的老人都能輕鬆上手！</p></div>
+          </div>
+        </details>
+        <details>
+          <summary>🔹 好玩</summary>
+          <div class="details-content">
+            <div><p class="small" style="padding-top: 8px;">完整挖礦體驗，從開採到販售都有豐富的樂趣！</p></div>
+          </div>
+        </details>
+        <details>
+          <summary>🔹 實用</summary>
+          <div class="details-content">
+            <div><p class="small" style="padding-top: 8px;">內建多項社群工具，是伺服器管理的好幫手！</p></div>
+          </div>
+        </details>
+        <details>
+          <summary>🔹 安全</summary>
+          <div class="details-content">
+            <div><p class="small" style="padding-top: 8px;">嚴格保護用戶資料，絕不外洩、不炸群！</p></div>
+          </div>
+        </details>
+        <details>
+          <summary>🔹 負責</summary>
+          <div class="details-content">
+            <div><p class="small" style="padding-top: 8px;">若出現問題，團隊會主動協助與負責，絕不推卸！</p></div>
+          </div>
+        </details>
+
+        <div class="meta">想要更多功能或整合？我們持續更新中，歡迎在支援群提案。</div>
+      </main>
+
+      <aside class="card">
+        <h3>立刻加入 / 邀請</h3>
+        <div class="cta">
+          <a class="btn btn-primary" href="https://discord.gg/mqfKKmQ4Tt" target="_blank" rel="noopener">Discord 支援群</a>
+          <a class="btn btn-primary" href="https://discord.com/oauth2/authorize?client_id=1226477089117700188&scope=bot+applications.commands&permissions=8" target="_blank" rel="noopener">邀請機器人到伺服器</a>
+          <a class="btn btn-primary" href="https://www.threads.com/@mining.ru_discordbot" target="_blank" rel="noopener">Threads 頁面</a>
+        </div>
+
+        <h4 style="margin-top:12px">快速資訊</h4>
+        <div class="small">
+          <strong>適合對象：</strong>社群管理員、遊戲化愛好者、喜歡互動的伺服器。
+        </div>
+        <div class="small" style="margin-top:8px">
+          <strong>權限需求：</strong>機器人需要管理權限以建立頻道與角色（可自訂授權）。
+        </div>
+
+        <h4 style="margin-top:12px">聯絡與回報</h4>
+        <div class="small">在支援群內貼上問題或回報，開發團隊會協助處理。</div>
+      </aside>
     </div>
 
-    <div id="usage" class="page hidden">
-      <div class="section">
-        <h2>📖 指令用法</h2>
-        <p><b>/hi</b> — 和機器人打招呼 👋</p>
-        <p><b>/daily</b> — 每日簽到領取 20 原礦</p>
-        <p><b>/cu</b> — 挖掘隨機 1~10 顆銅礦原礦</p>
-        <p><b>/fire &lt;數量&gt;</b> — 將原礦煉成煉好銅</p>
-        <p><b>/sell &lt;數量&gt;</b> — 販售煉好銅換取金錢</p>
-        <p><b>/see [@用戶]</b> — 查看自己或他人資產狀況</p>
-        <p><b>/say &lt;訊息&gt;</b> — 讓機器人說話</p>
-        <p><b>/yt &lt;YouTube連結&gt;</b> — 使用 yt-dlp 下載影片</p>
-        <p><b>/ai &lt;訊息&gt;</b> — 使用 Cohere AI 問問題</p>
-        <p><b>/gift &lt;類型&gt; &lt;@對象&gt; &lt;數量&gt;</b> — 贈送原礦、煉好銅或金錢</p>
-        <p><b>&amp;gv100 000325</b> — 限一次領取 100 原礦（密碼限定）</p>
-        <p><b>/help (希望獲得的銅礦數量)</b> — 向玩家乞討  </p>
-        <p><b>/helpmining (希望獲得的銅礦數量)</b> — 向機器人乞討有50%的機率會給 </p>
-        <p><b>/cunow</b> — 每天7:00宣布銅礦價格 </p>
-        <p><b>/cusee</b> — 查看銅礦價格 </p>
-        <p><b>/hollo</b> — 歡迎新成員 </p>
-      </div>
-    </div>
+    <footer class="container" style="max-width:980px;margin-top:26px">
+      <div class="small">© Mining-ru 團隊 — 保護使用者資料並持續更新功能。</div>
+    </footer>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const allDetails = document.querySelectorAll('details');
 
-    <div id="rules" class="page hidden">
-      <div class="section">
-        <h2>📜 規則與政策</h2>
-        <p>🔸 <b>免責聲明：</b><br>
-        有任何數據丟失、機器人停止運行、個資外洩、其他問題，Ruixue都不負責。<br>
-        (Ruixue code Studio 擁有最終解釋權)。</p><br>
-        <p>🔸 <b>規則：</b><br>
-        使用 <code>/say</code> 指令時避免使用髒話、低俗下流之字眼。</p><br>
-        <p>🔸 <b>隱私政策：</b><br>
-        Mining-ru 只存儲用戶 ID，不會存儲其他資料。存儲用戶 ID 只為了保存遊玩資料和領取紀錄。</p><br>
-        <p>開發團隊敬上 ❤️</p>
-      </div>
-    </div>
-  </main>
-
-  <script>
-    const menuBtn = document.getElementById("menu-btn");
-    const navBar = document.getElementById("nav-bar");
-    const brandText = document.getElementById("brand-text");
-
-    menuBtn.addEventListener("click", () => {
-      const isHidden = navBar.classList.contains("hidden");
-      navBar.classList.toggle("hidden");
-      brandText.classList.toggle("hidden");
-      menuBtn.textContent = isHidden ? "✖" : "☰";
-    });
-
-    function showPage(page) {
-      document.querySelectorAll(".page").forEach(el => el.classList.add("hidden"));
-      document.getElementById(page).classList.remove("hidden");
-      document.querySelectorAll(".nav a").forEach(el => el.classList.remove("active"));
-      document.getElementById("tab-" + page).classList.add("active");
-    }
-    showPage("home");
-  </script>
+        allDetails.forEach(details => {
+          details.addEventListener('toggle', event => {
+            if (details.open) {
+              allDetails.forEach(otherDetails => {
+                if (otherDetails !== details && otherDetails.open) {
+                  otherDetails.removeAttribute('open');
+                }
+              });
+            }
+          });
+        });
+      });
+    </script>
+  </div>
 </body>
 </html>
